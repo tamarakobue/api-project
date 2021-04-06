@@ -61,17 +61,41 @@ body {
 }
 
 #quotes {
+  color:indianred;
   margin: 50px;
-  font-size: x-small;
+  font-size:xx-small;
   font-family: "Times New Roman", Times, serif;
 }
 
+#like {
+  width: 100px;
+  height: 33px;
+  margin: 20px;
+  background-position: center;
+}
+
 .my-title {
-  color:lightslategray;
+  color:#fff;
   text-transform: uppercase;
+  text-shadow: 2px 2px black;
 }
 
 footer {
   margin: 50px;
   font-size: smaller;
+}
+
+#tinted-image {
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background: 
+    /* top, transparent red */ 
+    linear-gradient(
+      rgba(18, 12, 104, 0.45), 
+      rgba(255, 0, 0, 0.45)
+    );
+    /* bottom, image 
+    url(../img/container-bg.jpg);*/
 }
