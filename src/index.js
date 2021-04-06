@@ -10,7 +10,7 @@ function getQuotes() {
     .then(res => res.json())
     .then(data => {
         console.log('Sucess:', data)
-        newQuote = `<h2><em>${data.quote}</em></h2>`;
+        newQuote = `<h2>'<em>${data.quote}</em>'</h2>`;
         newAuthor = `<h4>${data.author}</h4>`;
         quotes.innerHTML = newQuote;
         authors.innerHTML = newAuthor; 

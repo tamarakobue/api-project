@@ -51,3 +51,27 @@ body {
   color: #fff;
   border-bottom-color: #fff;
 }
+
+/* PERSONAL CSS */
+
+#authors {
+  color:rosybrown;
+  text-transform: uppercase;
+  padding: 35px;
+}
+
+#quotes {
+  margin: 50px;
+  font-size: x-small;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.my-title {
+  color:lightslategray;
+  text-transform: uppercase;
+}
+
+footer {
+  margin: 50px;
+  font-size: smaller;
+}
