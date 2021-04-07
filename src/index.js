@@ -31,17 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return data;
     }
 
-    async function myFavorites() {
-        let response = await fetch ('http://quotes.stormconsultancy.co.uk/quotes/1.json')
-
+    async function myFav() {
+        let response = await fetch (`http://quotes.stormconsultancy.co.uk/quotes/${currentQuote}.json`)
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         }
-        const data = await response.json();
-
-        return data;
+        const favQuote = await response.json();
+        return favQuote;
     }
-
+    function favDisplay() {
+        myFav().then((favQuote) => {
+            
+            currentQuote
+        })
+    }
 
 
 
@@ -88,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // fetch('http://quotes.stormconsultancy.co.uk/random.json')
     // .then(res => res.json())
     // .then(data => {
-    //     console.log('Sucess:', data)
+    //     console.log('Success:', data)
     //     let newQuote = `<h2>'<em>${data.quote}</em>'</h2>`;
     //     let newAuthor = `<h4><em>~ </em>${data.author}</h4>`;
     //     quotes.innerHTML = newQuote;
