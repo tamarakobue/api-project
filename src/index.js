@@ -1,47 +1,86 @@
-const { data } = require("jquery")
-
 document.addEventListener('DOMContentLoaded', () => {
-    getQuote()
-    let button = document.querySelector('button')
-    button.addEventListener('click', getQuote)
-    let likeBtn = document.querySelector('#liked')
-    likeBtn.addEventListener('click', saveLiked)
-})
+    // functions to call upon content load
+    getQuote();
 
-let quotes = document.querySelector('#quotes')
-let authors = document.querySelector('#authors')
+    // global variables 
+    let button = document.querySelector('button');
+    let quotes = document.querySelector('#quotes');
+    let authors = document.querySelector('#authors');
+    let currentQuote;
 
-async function getQuote() {
-    let response = await fetch('http://quotes.stormconsultancy.co.uk/random.json')
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+    // variable event listeners
+    button.addEventListener('click', getQuote);
+
+    // use captured response and display quotes & authors
+    function getQuote() {
+        fetchQuote().then((data) => {
+            quotes.innerHTML = `<h2>'<em>${data.quote}</em>'</h2>`;
+            authors.innerHTML = `<h4><em> ~  </em>${data.author}</h4>`;
+            currentQuote = `${data.id}`
+        })
     }
-    return await response.data();
-}
 
-getQuote().then((data) => {
-    let newQuote = `<h2>'<em>${data.quote}</em>'</h2>`;
-    let newAuthor = `<h4><em>~ </em>${data.author}</h4>`;
-    quotes.innerHTML = newQuote;
-    authors.innerHTML = newAuthor;
-})
+    // fetch random single quote 
+    async function fetchQuote() {
+        let response = await fetch('http://quotes.stormconsultancy.co.uk/random.json')
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const data = await response.json(); 
+        // use .json() at end of response to tell it what kind of format? (i.e. .text for promise resolved in raw text. )
+        return data;
+    }
 
-
-// when user clicks a like button data is saved in their favorites
-
-
-    async function myFetch() {
-        let response = await fetch ('http://quotes.stormconsultancy.co.uk/quotes.json?callback=my_method')
+    async function myFavorites() {
+        let response = await fetch ('http://quotes.stormconsultancy.co.uk/quotes/1.json')
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         }
-        let newData = await response.data();
+        const data = await response.json();
+
+        return data;
     }
 
-    myFetch().then((data) => {
 
-    })
+
+
+
+
+// END
+})
+
+// let quotes = document.querySelector('#quotes')
+// let authors = document.querySelector('#authors')
+
+// async function fetchQuote() {
+//     let response = await fetch('http://quotes.stormconsultancy.co.uk/random.json')
+//     if (!response.ok) {
+//         throw new Error(`HTTP error! status: ${response.status}`)
+//     }
+//     return await response;
+// }
+
+// function getQuote() {
+//     fetchQuote().then((response) => {
+//         newQuote = `<h2>'<em>${response.quote}</em>'</h2>`;
+//         newAuthor = `<h4><em>~ </em>${response.author}</h4>`;
+//         quotes.innerHTML = newQuote;
+//         authors.innerHTML = newAuthor;
+//     })
+// }
+
+// when user clicks a like button data is saved in their favorites
+
+
+    // async function myFetch() {
+    //     let response = await fetch ('http://quotes.stormconsultancy.co.uk/quotes.json?callback=my_method')
+
+    //     if (!response.ok) {
+    //         throw new Error(`HTTP error! status: ${response.status}`)
+    //     }
+    //     let newData = await response.data();
+    // }
 
 
 
