@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let quotes = document.querySelector('#quotes');
     let authors = document.querySelector('#authors');
     let likeBtn = document.querySelector('#liked');
+    let favQuotesContainer = document.querySelector(".fav-quotes-container")
     let currentQuote = [];
 
 
@@ -19,12 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // use captured response and display quotes & authors
     function getQuote() {
         fetchQuote().then((data) => {
+            currentQuote.push(data); // push data into new object for like-btn accessibility 
             quotes.innerHTML = `<h2>'<em>${data.quote}</em>'</h2>`;
             authors.innerHTML = `<h4><em> ~  </em>${data.author}</h4>`;
-            let dataID = `${data.id}`;
-            currentQuote.push(dataID);
         })
     }
+    console.log(currentQuote);
 
     // fetch random single quote 
     async function fetchQuote() {
@@ -40,7 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function favDisplay() {
         myFav().then((data) => {
             console.log('WE HAVE:', data);
+            if (likeBtn === true) {
+                data.forEach(data => {
+                    favQuotesContainer.innerHTML +=`
+                    <h2>${data.quote}</h2>
+                    <h4>${data.author}</h4>
+                    `
 
+                })
+            }
            
         })
     }
@@ -62,41 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // END
 })
-
-// let quotes = document.querySelector('#quotes')
-// let authors = document.querySelector('#authors')
-
-// async function fetchQuote() {
-//     let response = await fetch('http://quotes.stormconsultancy.co.uk/random.json')
-//     if (!response.ok) {
-//         throw new Error(`HTTP error! status: ${response.status}`)
-//     }
-//     return await response;
-// }
-
-// function getQuote() {
-//     fetchQuote().then((response) => {
-//         newQuote = `<h2>'<em>${response.quote}</em>'</h2>`;
-//         newAuthor = `<h4><em>~ </em>${response.author}</h4>`;
-//         quotes.innerHTML = newQuote;
-//         authors.innerHTML = newAuthor;
-//     })
-// }
-
-// when user clicks a like button data is saved in their favorites
-
-
-    // async function myFetch() {
-    //     let response = await fetch ('http://quotes.stormconsultancy.co.uk/quotes.json?callback=my_method')
-
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error! status: ${response.status}`)
-    //     }
-    //     let newData = await response.data();
-    // }
-
-
-
 
     // fetch('http://quotes.stormconsultancy.co.uk/random.json')
     // .then(res => res.json())
