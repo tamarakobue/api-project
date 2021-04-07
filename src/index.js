@@ -6,10 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let button = document.querySelector('button');
     let quotes = document.querySelector('#quotes');
     let authors = document.querySelector('#authors');
+    let likeBtn = document.querySelector('#liked');
     let currentQuote;
 
     // variable event listeners
     button.addEventListener('click', getQuote);
+    likeBtn.addEventListener('click', myFav);
+    
 
     // use captured response and display quotes & authors
     function getQuote() {
@@ -41,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function favDisplay() {
         myFav().then((favQuote) => {
+            console.log(favQuote)
             
-            currentQuote
         })
     }
 
