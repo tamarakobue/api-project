@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     // functions to call upon content load
-    getQuote();
+    getQuote(); 
+    let currentQuote;
+    favDisplay();
 
     // global variables 
     let button = document.querySelector('button');
     let quotes = document.querySelector('#quotes');
     let authors = document.querySelector('#authors');
     let likeBtn = document.querySelector('#liked');
-    let currentQuote;
+    let allQuotes = [];
 
     // variable event listeners
     button.addEventListener('click', getQuote);
@@ -34,20 +36,23 @@ document.addEventListener('DOMContentLoaded', () => {
         return data;
     }
 
+    function favDisplay() {
+        myFav().then((data) => {
+            console.log('WE HAVE:', data)
+           
+        })
+    }
+
     async function myFav() {
-        let response = await fetch (`http://quotes.stormconsultancy.co.uk/quotes/${currentQuote}.json`)
+
+        let response = await fetch ('http://quotes.stormconsultancy.co.uk/quotes.json/')
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         }
-        const favQuote = await response.json();
-        return favQuote;
+        const data = await response.json();
+        return data;
     }
-    function favDisplay() {
-        myFav().then((favQuote) => {
-            console.log(favQuote)
-            
-        })
-    }
+ 
 
 
 
