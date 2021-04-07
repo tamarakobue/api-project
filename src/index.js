@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // functions to call upon content load
     getQuote(); 
-    let currentQuote;
     favDisplay();
 
     // global variables 
@@ -9,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let quotes = document.querySelector('#quotes');
     let authors = document.querySelector('#authors');
     let likeBtn = document.querySelector('#liked');
-    let allQuotes = [];
+    let currentQuote = [];
+
 
     // variable event listeners
     button.addEventListener('click', getQuote);
@@ -21,15 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchQuote().then((data) => {
             quotes.innerHTML = `<h2>'<em>${data.quote}</em>'</h2>`;
             authors.innerHTML = `<h4><em> ~  </em>${data.author}</h4>`;
-            currentQuote = `${data.id}`
+            let dataID = `${data.id}`;
+            currentQuote.push(dataID);
         })
     }
 
     // fetch random single quote 
     async function fetchQuote() {
-        let response = await fetch('http://quotes.stormconsultancy.co.uk/random.json')
+        let response = await fetch('http://quotes.stormconsultancy.co.uk/random.json');
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`)
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json(); 
         // use .json() at end of response to tell it what kind of format? (i.e. .text for promise resolved in raw text. )
@@ -38,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function favDisplay() {
         myFav().then((data) => {
-            console.log('WE HAVE:', data)
+            console.log('WE HAVE:', data);
+
            
         })
     }
