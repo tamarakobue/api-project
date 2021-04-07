@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // functions to call upon content load
     getQuote(); 
-    favDisplay();
 
     // global variables 
     let button = document.querySelector('button');
@@ -10,11 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let likeBtn = document.querySelector('#liked');
     let favQuotesContainer = document.querySelector(".fav-quotes-container")
     let currentQuote = [];
-
+    let author;
+    let quote;
 
     // variable event listeners
     button.addEventListener('click', getQuote);
-    likeBtn.addEventListener('click', favDisplay);
+    likeBtn.addEventListener('click', favQuotes);
     
 
     // use captured response and display quotes & authors
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             authors.innerHTML = `<h4><em> ~  </em>${data.author}</h4>`;
         })
     }
-    console.log(currentQuote);
+    console.log('CURRENT QUOTE CONTENTS', currentQuote);
 
     // fetch random single quote 
     async function fetchQuote() {
@@ -38,47 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
         return data;
     }
 
-    // display saved data
-    function favDisplay() {
-        myFav().then((data) => {
-            console.log('WE HAVE:', data);
-        // make it only select the info i need (i.e.: current quote then gets displayed only)
-                favQuotesContainer.innerHTML +=`
-                <h2>${element.quote}</h2>
-                <h4>${element.author}</h4>
-                `
-            })
+    function favQuotes() {
+        currentQuote.forEach(el => {
+            favQuotesContainer.innerHTML = '';
+           EventTarget.[el].author = author;
+           [el].quote = quote;
+            favQuotesContainer.innerHTML += `
+            <h2>${quote}</h2>
+            <h4>${author}</h4>
+            `
+        })
     }
 
-    // request data for my favorites
-    async function myFav() {
-        let response = await fetch ('http://quotes.stormconsultancy.co.uk/quotes.json/')
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`)
-        }
-        const data = await response.json();
-        return data;
-    }
- 
-
-
-
-
-
-    // END
+    favQuotes();
+    //////////////// END ///////////////
 })
+// [0].author
 
-    // fetch('http://quotes.stormconsultancy.co.uk/random.json')
-    // .then(res => res.json())
-    // .then(data => {
-    //     console.log('Success:', data)
-    //     let newQuote = `<h2>'<em>${data.quote}</em>'</h2>`;
-    //     let newAuthor = `<h4><em>~ </em>${data.author}</h4>`;
-    //     quotes.innerHTML = newQuote;
-    //     authors.innerHTML = newAuthor; 
-    // })
-    // .catch((error) => {
-    //     console.error(error);
-    //   });
-    // // capture data.id of current fetched quote and display in favorites
-    // let favQuote = ...data.id
+ ////////////////////OLD CODE //////////////////////
