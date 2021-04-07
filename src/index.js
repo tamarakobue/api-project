@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // variable event listeners
     button.addEventListener('click', getQuote);
-    likeBtn.addEventListener('click', myFav);
+    likeBtn.addEventListener('click', favDisplay);
     
 
     // use captured response and display quotes & authors
@@ -38,24 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return data;
     }
 
+    // display saved data
     function favDisplay() {
         myFav().then((data) => {
             console.log('WE HAVE:', data);
-            if (likeBtn === true) {
-                data.forEach(data => {
-                    favQuotesContainer.innerHTML +=`
-                    <h2>${data.quote}</h2>
-                    <h4>${data.author}</h4>
-                    `
-
-                })
-            }
-           
-        })
+        // make it only select the info i need (i.e.: current quote then gets displayed only)
+                favQuotesContainer.innerHTML +=`
+                <h2>${element.quote}</h2>
+                <h4>${element.author}</h4>
+                `
+            })
     }
 
+    // request data for my favorites
     async function myFav() {
-
         let response = await fetch ('http://quotes.stormconsultancy.co.uk/quotes.json/')
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
@@ -69,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// END
+    // END
 })
 
     // fetch('http://quotes.stormconsultancy.co.uk/random.json')
