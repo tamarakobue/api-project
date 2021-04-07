@@ -53,6 +53,9 @@ body {
 }
 
 /* PERSONAL CSS */
+.like-section {
+  padding: 20px;
+}
 
 #authors {
   color:rosybrown;
