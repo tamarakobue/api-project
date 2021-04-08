@@ -6,20 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let button = document.querySelector('button');
     let likeBtn = document.querySelector('#fav-button');
 
- 
-
     // event listeners
     button.addEventListener('click', getQuote);
-    likeBtn.addEventListener('click', likeQuote);
+    likeBtn.addEventListener('click', handleFavorites);
 })
 
   // use captured response and display quotes & authors
   function getQuote() {
     let quotes = document.querySelector('#quotes');
     let authors = document.querySelector('#authors');
-    let likeBtn = document.querySelector('#fav-button');
-    
-    //let currentQuote = [];
 
     fetch('http://quotes.stormconsultancy.co.uk/random.json')
     .then(res => res.json())
@@ -38,13 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 }
 
-function likeQuote(event) {
+function handleFavorites(event) {
     let favQuotesContainer = document.querySelector(".fav-quotes-container")
-    let deleteBtn = document.createElement("BUTTON");
-    deleteBtn.innerHTML = 'Delete';
     favQuotesContainer.style.display = 'block';
     let favQuote = document.querySelectorAll('em')[0].innerHTML;
     let favAuthor = document.querySelectorAll('em')[1].innerHTML;
-    favQuotesContainer.innerHTML += `<p>${favQuote} </br>- ${favAuthor}</p><</hr>`
-    document.favQuotesContainer.appendChild(deleteBtn);
+    favQuotesContainer.innerHTML += `<p>${favQuote} </br>- ${favAuthor}</p><hr>`
+
 }
