@@ -45,3 +45,5 @@ function likeQuote(event) {
     let favAuthor = document.querySelectorAll('em')[1].innerHTML;
     favQuotesContainer.innerHTML += `<p>${favQuote} </br>- ${favAuthor}</p></hr>`
 }
+
+//function deleteLiked
