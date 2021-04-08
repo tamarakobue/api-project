@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let likeBtn = document.querySelector('#liked');
     let favQuotesContainer = document.querySelector(".fav-quotes-container")
     let currentQuote = [];
-    let author;
-    let quote;
 
     // variable event listeners
     button.addEventListener('click', getQuote);
@@ -39,15 +37,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function favQuotes() {
-        currentQuote.forEach(el => {
-            favQuotesContainer.innerHTML = '';
-           EventTarget.[el].author = author;
-           [el].quote = quote;
-            favQuotesContainer.innerHTML += `
-            <h2>${quote}</h2>
-            <h4>${author}</h4>
-            `
-        })
+        for (let key in currentQuote) {
+            if (currentQuote.hasOwnProperty(key)) {
+              console.log(key + " -> " + currentQuote[key]);
+            }
+          };
+        favQuotesContainer.innerHTML += `
+        <h2>${currentQuote.quote}</h2>
+        <h4>${currentQuote.author}</h4>
+        `
+
+
+
+
+        // currentQuote.forEach(el => {
+        //     favQuotesContainer.innerHTML = '';
+        //    EventTarget.[el].author = author;
+        //    [el].quote = quote;
+            // favQuotesContainer.innerHTML += `
+            // <h2>${quote}</h2>
+            // <h4>${author}</h4>
+            // `
+        // })
     }
 
     favQuotes();
