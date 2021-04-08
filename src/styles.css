@@ -114,3 +114,7 @@ footer {
     /* bottom, image 
     url(../img/container-bg.jpg);*/
 }
+
+.fav-quotes-container {
+  text-align: left;
+}

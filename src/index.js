@@ -40,10 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function likeQuote(event) {
     let favQuotesContainer = document.querySelector(".fav-quotes-container")
+    let deleteBtn = document.createElement("BUTTON");
+    deleteBtn.innerHTML = 'Delete';
     favQuotesContainer.style.display = 'block';
     let favQuote = document.querySelectorAll('em')[0].innerHTML;
     let favAuthor = document.querySelectorAll('em')[1].innerHTML;
-    favQuotesContainer.innerHTML += `<p>${favQuote} </br>- ${favAuthor}</p></hr>`
+    favQuotesContainer.innerHTML += `<p>${favQuote} </br>- ${favAuthor}</p><</hr>`
+    document.favQuotesContainer.appendChild(deleteBtn);
 }
-
-//function deleteLiked
