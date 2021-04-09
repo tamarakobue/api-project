@@ -32,12 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error(error);
     });
 }
+    //
+    function handleFavorites(event) {
+        let favQuotesContainer = document.querySelector(".fav-quotes-container")
+        favQuotesContainer.style.display = 'block';
+        let favQuote = document.querySelectorAll('em')[0].innerHTML;
+        let favAuthor = document.querySelectorAll('em')[1].innerHTML;
+        favQuotesContainer.innerHTML += `<p>${favQuote} </br>- ${favAuthor}</p><hr>`
 
-function handleFavorites(event) {
-    let favQuotesContainer = document.querySelector(".fav-quotes-container")
-    favQuotesContainer.style.display = 'block';
-    let favQuote = document.querySelectorAll('em')[0].innerHTML;
-    let favAuthor = document.querySelectorAll('em')[1].innerHTML;
-    favQuotesContainer.innerHTML += `<p>${favQuote} </br>- ${favAuthor}</p><hr>`
+    }
 
-}
+    function deleteFavorites(e) {
+
+    }
